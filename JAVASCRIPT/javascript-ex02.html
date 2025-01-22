@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            body {
+                background-color: rgb(226, 200, 243);
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+                
+            }
+            h1 {
+                text-align: center;
+                font-size: 20px;
+                border: 10px groove rgb(225, 153, 153);
+                margin: 20px;
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+        <h1> Javascript BMI Calculator Example</h1>
+        <script>
+            document.write("BMI Calculator")
+            var wt=75, ht=168;
+            let bmi = wt / ((ht/100)*(ht/100));
+            document.write("<br>");
+            document.write("<h2>Your BMI:"+bmi.toFixed(2)+"</h2>");
+            let bmi_val = bmi.toFixed(2);
+            if (bmi_val < 18.5)
+                document.write("<br>Thinness");
+            else if (bmi_val >=18.5 && bmi_val<25)
+                document.write("<br>Normal");
+            else if (bmi_val >=25 && bmi_val <30)
+                document.write("<br>Overweight");
+            else if (bmi_val >=30 && bmi_val <35)
+                document.write("<br>Obese Class I");
+            else if (bmi_val >=35 && bmi_val <40)
+                document.write("<br>Obese Class II");
+            else
+                document.write("<br>Obese Class III");
+
+
+            
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - Metric Units</title>
+    <style>
+        body {
+            background-color: rgb(255, 128, 0);
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .bmi-result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .bmi-category {
+            font-size: 20px;
+            margin-top: 10px;
+            color: green;
+        }
+        .error {
+            color: red;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BMI Calculator - Metric Units</h1>
+        <form id="bmiForm">
+            <label for="height">Enter your height (cm):</label><br>
+            <input type="number" id="height" name="height" step="0.01" required><br><br>
+            <label for="weight">Enter your weight (kg):</label><br>
+            <input type="number" id="weight" name="weight" step="0.01" required><br><br>
+            <button type="submit">Calculate</button>
+        </form>
+
+        <div id="result" class="bmi-result"></div>
+        <div id="category" class="bmi-category"></div>
+        <div id="error" class="error"></div>
+
+        <h2>BMI Classification Table</h2>
+        <table border="1">
+            <tr><th>Classification</th><th>BMI range (kg/m²)</th></tr>
+            <tr><td>Severe Thinness</td><td>&lt; 16</td></tr>
+            <tr><td>Moderate Thinness</td><td>16 - 17</td></tr>
+            <tr><td>Mild Thinness</td><td>17 - 18.5</td></tr>
+            <tr><td>Normal</td><td>18.5 - 25</td></tr>
+            <tr><td>Overweight</td><td>25 - 30</td></tr>
+            <tr><td>Obese Class I</td><td>30 - 35</td></tr>
+            <tr><td>Obese Class II</td><td>35 - 40</td></tr>
+            <tr><td>Obese Class III</td><td>&gt; 40</td></tr>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('bmiForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const heightInput = document.getElementById('height').value;
+            const weightInput = document.getElementById('weight').value;
+            const resultDiv = document.getElementById('result');
+            const categoryDiv = document.getElementById('category');
+            const errorDiv = document.getElementById('error');
+
+            // Clear previous results and errors
+            resultDiv.textContent = '';
+            categoryDiv.textContent = '';
+            errorDiv.textContent = '';
+
+            const height = parseFloat(heightInput) / 100; // Convert cm to meters
+            const weight = parseFloat(weightInput);
+
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+                errorDiv.textContent = 'Please enter valid height and weight values.';
+                return;
+            }
+
+            // Calculate BMI
+            const bmi = weight / (height * height);
+
+            // Determine BMI category
+            let category = '';
+            let color = 'green';
+            if (bmi < 16) {
+                category = 'Severe Thinness';
+                color = 'red';
+            } else if (bmi < 17) {
+                category = 'Moderate Thinness';
+                color = 'orange';
+            } else if (bmi < 18.5) {
+                category = 'Mild Thinness';
+                color = 'yellow';
+            } else if (bmi < 25) {
+                category = 'Normal';
+                color = 'green';
+            } else if (bmi < 30) {
+                category = 'Overweight';
+                color = 'blue';
+            } else if (bmi < 35) {
+                category = 'Obese Class I';
+                color = 'purple';
+            } else if (bmi < 40) {
+                category = 'Obese Class II';
+                color = 'brown';
+            } else {
+                category = 'Obese Class III';
+                color = 'darkred';
+            }
+
+            // Display the results
+            resultDiv.textContent = `Your BMI is: ${bmi.toFixed(2)}`;
+            categoryDiv.textContent = `You are in the category: ${category}`;
+            categoryDiv.style.color = color;
+        });
+    </script>
+</body>
+</html>

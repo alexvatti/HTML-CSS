@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: antiquewhite;
+                font-size: 20px;
+
+            }
+            h1 {
+                font-size: 40px;
+                border: 10px groove rgb(106, 121, 94);
+                border-radius: 10px;
+                text-align: center;
+                margin: 20px;
+
+            }
+            h2 {
+                font-size: 30px;
+                margin: 20px;
+            }
+            #wt ,#ht {
+                border: 10px solid rgb(236, 225, 225);
+                border-radius: 10x;
+                padding: 10px;
+
+
+            }
+            label {
+                margin: 20px;
+
+            }
+            button {
+                border: 10px solid rgb(155, 188, 232);
+                font-size: 20px;
+                margin-left: 80px;
+            }
+            table {
+                width: 60%;
+                height: 30%;
+                border-collapse: collapse;
+                margin: 50px;
+            }
+
+            th, td {
+                padding: 20px;
+                text-align: left;
+                border: 10px solid #371b1b;
+            }
+            #result {
+                padding: 20px;
+                text-align: left;
+                margin-left: 40px;
+                font-style: italic;
+                font-weight: bold;
+                font-size: 30px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <h1>BODY MASS INDEX CALCAULTOR</h1>
+        <form id="bmiForm">
+            <label for="ht"> Enter Height in cms : </label>
+            <input type="number" name="ht" id="ht" required>
+            <br> <br>
+            <label for="wt"> Enter Weight in kg : </label>
+            <input type="number" name="wt" id="wt" required>
+            <br> <br>
+            <button type="button" onclick="calculateBMI()">Calculate BMI</button>
+        </form>
+        
+        <p id="result"></p>
+    
+        <script>
+            function calculateBMI() {
+                // Get the values from input fields
+                var weight = parseFloat(document.getElementById('wt').value);
+                var height = parseFloat(document.getElementById('ht').value);
+    
+                // Check if values are valid
+                if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                    document.getElementById('result').innerText = "Please enter valid values for weight and height.";
+                    return;
+                }
+    
+                // Calculate BMI
+                var bmi = weight / (height/100 * height/100);
+    
+                // Display the result
+                document.getElementById('result').innerText = "Your BMI is: " + bmi.toFixed(2);
+            }
+        </script>
+
+        <h2>BMI Classification Table</h2>
+        <table>
+            <tr><th>Classification</th><th>BMI range (kg/m²)</th></tr>
+            <tr><td>Severe Thinness</td><td>&lt; 16</td></tr>
+            <tr><td>Moderate Thinness</td><td>16 - 17</td></tr>
+            <tr><td>Mild Thinness</td><td>17 - 18.5</td></tr>
+            <tr><td>Normal</td><td>18.5 - 25</td></tr>
+            <tr><td>Overweight</td><td>25 - 30</td></tr>
+            <tr><td>Obese Class I</td><td>30 - 35</td></tr>
+            <tr><td>Obese Class II</td><td>35 - 40</td></tr>
+            <tr><td>Obese Class III</td><td>&gt; 40</td></tr>
+        </table>
+
+        <script>
+
+        </script>
+    </body>
+
+</html>
